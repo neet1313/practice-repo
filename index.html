@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 A Very Important Question for Ela 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts background */
+        .heart-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.6;
+            animation: float 10s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scale(0.5) rotate(-5deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #ff6b9d;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .question {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #333;
+            margin: 30px 0;
+            line-height: 1.4;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+            padding: 15px 30px;
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            animation: wiggle 1s infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.2);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.5);
+        }
+
+        #noBtn {
+            background: #ff4757;
+            color: white;
+            min-width: 120px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            opacity: 1 !important;
+        }
+
+        #noBtn:hover {
+            background: #ff3838;
+        }
+
+        .buttons-container {
+            position: relative;
+            width: 100%;
+            min-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .celebration {
+            display: none;
+            animation: celebrate 0.6s ease-out;
+        }
+
+        @keyframes celebrate {
+            0% {
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+            }
+        }
+
+        .celebration h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5em;
+            color: #ff6b9d;
+            margin-bottom: 20px;
+        }
+
+        .celebration p {
+            font-size: 1.3em;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .gif-container {
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .gif-container img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .emoji-rain {
+            font-size: 30px;
+            position: fixed;
+            animation: fall 4s linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        .attempt-counter {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-bg" id="heartBg"></div>
+
+    <div class="container">
+        <div id="questionSection">
+            <h1>Yo Yo Wassupppp Ela! 💕</h1>
+            <div class="question">
+                Will you be my Valentine? 🌹
+            </div>
+            <div class="subtitle">
+                Choose wisely... or try to 😏
+            </div>
+            
+            <div class="buttons-container">
+                <div class="buttons">
+                    <button id="yesBtn">Fuckin Hell Yeah! 💖</button>
+                    <button id="noBtn">Nopee</button>
+                </div>
+            </div>
+
+            <div class="attempt-counter" id="attempts"></div>
+        </div>
+
+        <div class="celebration" id="celebration">
+            <h2>YAAAY! 🎉💕✨</h2>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/UO5elnTqo4vSg/giphy.gif" alt="Celebration">
+            </div>
+            <p>I knew you'd say yes! 😊</p>
+            <p style="margin-top: 20px;">Lesssssss goooooo!!!! 💝</p>
+            <p style="margin-top: 20px; font-size: 0.9em; color: #999;">
+                (You didn't really have a choice 😄)
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const questionSection = document.getElementById('questionSection');
+        const celebration = document.getElementById('celebration');
+        const attemptsDiv = document.getElementById('attempts');
+        const heartBg = document.getElementById('heartBg');
+
+        let attempts = 0;
+        let noBtnSize = 1;
+
+        // Create floating hearts background
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heartBg.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 15000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // Make "No" button run away and shrink
+        noBtn.addEventListener('mouseenter', function() {
+            attempts++;
+            
+            // Make button absolute positioned after first hover
+            if (attempts === 1) {
+                noBtn.style.position = 'absolute';
+            }
+            
+            // Get the actual container boundaries
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            const buttonsContainer = document.querySelector('.buttons-container');
+            const buttonsRect = buttonsContainer.getBoundingClientRect();
+            
+            // Calculate safe boundaries (keep button inside white box)
+            // We'll move it within the container padding area
+            const safeWidth = 350;   // Stay well within the white box
+            const safeHeight = 250;  // Move vertically but stay in view
+            
+            // Random position but centered in the container
+            const randomX = Math.random() * safeWidth - (safeWidth / 2);
+            const randomY = (Math.random() * safeHeight) - 100;
+            
+            noBtn.style.left = `calc(50% + ${randomX}px)`;
+            noBtn.style.top = randomY + 'px';
+            noBtn.style.transform = `translateX(-50%) scale(${noBtnSize})`;
+            
+            // Shrink the button gradually
+            noBtnSize *= 0.92;
+            
+            // Make Yes button bigger
+            const yesScale = 1 + (attempts * 0.08);
+            yesBtn.style.transform = `scale(${yesScale})`;
+            
+            // Update attempts counter with funny messages
+            const messages = [
+                "Nice try! 😏",
+                "Really? Come on... 😅",
+                "The answer is obviously YES! 💕",
+                "Stop running away from love! 💘",
+                "You know you want to click YES 😊",
+                "I can do this all day! 😎",
+                "Your mouse slipped, right? 😄",
+                "YES is getting bigger... hint hint 👀",
+                "Just give in already! 💝",
+                "Fine, keep playing hard to get 😤",
+                "Keep Trying....... 😆",
+                "Keep Trying....... 👀"
+            ];
+            
+            const message = messages[Math.min(attempts - 1, messages.length - 1)];
+            attemptsDiv.textContent = `Escape attempts: ${attempts} - ${message}`;
+            
+            // After 8 attempts, make NO button run really fast
+            if (attempts >= 8) {
+                noBtn.style.transition = 'all 0.15s ease';
+            }
+        });
+
+        // Make clicking anywhere near "No" button trigger the escape
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Trigger the mouseenter behavior instead
+            noBtn.dispatchEvent(new Event('mouseenter'));
+        });
+
+        // YES button celebration
+        yesBtn.addEventListener('click', function() {
+            questionSection.style.display = 'none';
+            celebration.style.display = 'block';
+            
+            // Create confetti
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'emoji-rain';
+                    const emojis = ['💕', '💖', '💗', '💝', '💘', '❤️', '🌹', '✨'];
+                    confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    confetti.style.top = '-50px';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 50);
+            }
+            
+            // Change background to celebration colors
+            document.body.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+        });
+    </script>
+</body>
+</html>
