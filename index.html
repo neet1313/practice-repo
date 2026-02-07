@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -21,6 +22,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             overflow: hidden;
             position: relative;
+            padding: 20px;
         }
 
         /* Floating hearts background */
@@ -69,6 +71,13 @@
             animation: slideIn 0.8s ease-out;
         }
 
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+        }
+
         @keyframes slideIn {
             from {
                 transform: scale(0.5) rotate(-5deg);
@@ -88,6 +97,12 @@
             animation: pulse 2s infinite;
         }
 
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+        }
+
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
@@ -105,6 +120,13 @@
             line-height: 1.4;
         }
 
+        @media (max-width: 600px) {
+            .question {
+                font-size: 1.4em;
+                margin: 20px 0;
+            }
+        }
+
         .subtitle {
             font-size: 1.1em;
             color: #666;
@@ -112,11 +134,24 @@
             font-style: italic;
         }
 
+        @media (max-width: 600px) {
+            .subtitle {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+        }
+
         .buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
             align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .buttons {
+                gap: 15px;
+            }
         }
 
         button {
@@ -128,6 +163,14 @@
             transition: all 0.3s ease;
             font-size: 1.2em;
             padding: 15px 30px;
+            touch-action: manipulation;
+        }
+
+        @media (max-width: 600px) {
+            button {
+                font-size: 1em;
+                padding: 12px 25px;
+            }
         }
 
         #yesBtn {
@@ -256,7 +299,7 @@
 
     <div class="container">
         <div id="questionSection">
-            <h1>Yo Yo Wassupppp Ela! 💕</h1>
+            <h1>YO YO Wassupppp Ela! 💕</h1>
             <div class="question">
                 Will you be my Valentine? 🌹
             </div>
@@ -266,8 +309,8 @@
             
             <div class="buttons-container">
                 <div class="buttons">
-                    <button id="yesBtn">Fuckin Hell Yeah! 💖</button>
-                    <button id="noBtn">Nopee</button>
+                    <button id="yesBtn">Fuckin Hell Yeahhhh! 💖</button>
+                    <button id="noBtn">Nooopeee</button>
                 </div>
             </div>
 
@@ -275,12 +318,12 @@
         </div>
 
         <div class="celebration" id="celebration">
-            <h2>YAAAY! 🎉💕✨</h2>
+            <h2>Lessss Gooo! 🎉💕✨</h2>
             <div class="gif-container">
                 <img src="https://media.giphy.com/media/UO5elnTqo4vSg/giphy.gif" alt="Celebration">
             </div>
-            <p>I knew you'd say yes! 😊</p>
-            <p style="margin-top: 20px;">Lesssssss goooooo!!!! 💝</p>
+            <p>I knew you'd say yes!!!</p>
+            <p style="margin-top: 20px;">Isss gonna be Neet + Ela = Nutella 💝</p>
             <p style="margin-top: 20px; font-size: 0.9em; color: #999;">
                 (You didn't really have a choice 😄)
             </p>
@@ -314,7 +357,7 @@
         setInterval(createHeart, 300);
 
         // Make "No" button run away and shrink
-        noBtn.addEventListener('mouseenter', function() {
+        function makeNoButtonRunAway() {
             attempts++;
             
             // Make button absolute positioned after first hover
@@ -329,9 +372,10 @@
             const buttonsRect = buttonsContainer.getBoundingClientRect();
             
             // Calculate safe boundaries (keep button inside white box)
-            // We'll move it within the container padding area
-            const safeWidth = 350;   // Stay well within the white box
-            const safeHeight = 250;  // Move vertically but stay in view
+            // Adjust for mobile screens
+            const isMobile = window.innerWidth <= 600;
+            const safeWidth = isMobile ? 250 : 350;   // Stay well within the white box
+            const safeHeight = isMobile ? 200 : 250;  // Move vertically but stay in view
             
             // Random position but centered in the container
             const randomX = Math.random() * safeWidth - (safeWidth / 2);
@@ -360,8 +404,8 @@
                 "YES is getting bigger... hint hint 👀",
                 "Just give in already! 💝",
                 "Fine, keep playing hard to get 😤",
-                "Keep Trying....... 😆",
-                "Keep Trying....... 👀"
+                "This is getting silly now 😆",
+                "The No button is shrinking... notice? 👀"
             ];
             
             const message = messages[Math.min(attempts - 1, messages.length - 1)];
@@ -371,13 +415,27 @@
             if (attempts >= 8) {
                 noBtn.style.transition = 'all 0.15s ease';
             }
+        }
+
+        // Desktop: hover event
+        noBtn.addEventListener('mouseenter', makeNoButtonRunAway);
+
+        // Mobile: touch events
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            makeNoButtonRunAway();
+        });
+
+        noBtn.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            makeNoButtonRunAway();
         });
 
         // Make clicking anywhere near "No" button trigger the escape
         noBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            // Trigger the mouseenter behavior instead
-            noBtn.dispatchEvent(new Event('mouseenter'));
+            // Trigger the run away behavior instead
+            makeNoButtonRunAway();
         });
 
         // YES button celebration
